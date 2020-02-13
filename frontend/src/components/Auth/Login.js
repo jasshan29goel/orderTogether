@@ -23,9 +23,15 @@ const Login = ({login,isAuthenticated}) => {
         login(email, password,type);
     };
     if (isAuthenticated) {
-        return <Redirect to='/products' />;
-      };
-
+      if(type==="vendor")
+      {
+        return <Redirect to='/vendor' />;
+      }
+      if(type==="customer") 
+      {
+        return <Redirect to='/customer' />;
+      }
+}
     return (
         <Fragment> 
         <div className="container card mb-3 ">

@@ -6,6 +6,7 @@ const mongoose = require('mongoose')
 
 const register = require('./routes/api/register');
 const auth = require('./routes/api/auth');
+const vendor = require('./routes/api/vendor');
 
 
 
@@ -14,6 +15,7 @@ const PORT = 4000;
 const userRoutes = express.Router();
 
 let User = require('./models/user');
+let Product = require('./models/product');
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -31,6 +33,7 @@ app.use(express.json({extended : false}));
 
 app.use('/api/register', register);
 app.use('/api/auth', auth);
+app.use('/api/vendor', vendor);
 
 
 

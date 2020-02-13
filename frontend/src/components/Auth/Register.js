@@ -29,8 +29,15 @@ const Register = ({register , isAuthenticated}) => {
         }
       };
       if (isAuthenticated) {
-        return <Redirect to='/products' />;
-      }
+          if(type==="vendor")
+          {
+            return <Redirect to='/vendor' />;
+          }
+          if(type==="customer") 
+          {
+            return <Redirect to='/customer' />;
+          }
+    }
 
     return (
 <Fragment>
