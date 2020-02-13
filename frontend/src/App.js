@@ -1,34 +1,40 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import React, { Fragment } from 'react';
+import { BrowserRouter as Router, Route,Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css"
 
-import UsersList from './components/users-list.component'
-import CreateUser from './components/create-user.component'
+// import UsersList from './components/users-list.component'
+// import CreateUser from './components/create-user.component'
 
+import Navbar from './components/Layout/Navbar'
+import Landing from './components/Layout/Landing'
+
+import Login from './components/Auth/Login'
+import Register from './components/Auth/Register'
+import Products from './components/Object/Products'
+
+// redux store
+import { Provider } from 'react-redux';
+import store from './store';
 
 function App() {
   return (
-    <Router>
-      <div className="container">
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-          <Link to="/" className="navbar-brand">App</Link>
-          <div className="collapse navbar-collapse">
-            <ul className="navbar-nav mr-auto">
-              <li className="navbar-item">
-                <Link to="/" className="nav-link">Users</Link>
-              </li>
-              <li className="navbar-item">
-                <Link to="/create" className="nav-link">Create User</Link>
-              </li>
-            </ul>
-          </div>
-        </nav>
+    <Provider store={store}>
 
-        <br/>
-        <Route path="/" exact component={UsersList}/>
-        <Route path="/create" component={CreateUser}/>
-      </div>
+     <Router>
+      <Fragment>
+        <Navbar/>
+        <Route exact path='/' component={Landing}/>  
+        <section className='container'>
+          <Switch>
+          <Route exact path='/register' component={Register}/>  
+          <Route exact path='/login' component={Login}/>  
+          <Route exact path='/products' component={Products}/>  
+            
+          </Switch>
+        </section>
+      </Fragment>
     </Router>
+    </Provider>
   );
 }
 
