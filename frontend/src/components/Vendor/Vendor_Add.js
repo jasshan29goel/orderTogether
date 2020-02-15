@@ -5,7 +5,7 @@ import { addProduct } from '../../actions/product';
 
 import FormElement from '../Layout/FormElement';
 
-const Vendor = ({ token,addProduct }) => {
+const Vendor_Add = ({ token,addProduct }) => {
     const [formData, setFormData] = useState({
         name: '',
         price: 0,
@@ -42,12 +42,12 @@ const Vendor = ({ token,addProduct }) => {
  </Fragment>
     )
 }
-Vendor.propTypes = {
+Vendor_Add.propTypes = {
     addProduct: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
     token: state.auth.token
   });
-export default connect(mapStateToProps,{addProduct})(Vendor);
+export default connect(mapStateToProps,{addProduct})(Vendor_Add);
 
 

@@ -2,17 +2,17 @@ import axios from 'axios';
 import {
   PRODUCTS_ERROR,
   ADD_PRODUCT,
+  GET_PRODUCTS,
 } from './types';
 
 
 
 // add products
-export const addProduct = (name,price,quantity,token) => async dispatch => {
+export const addProduct = (name,price,quantity) => async dispatch => {
     
   const config = {
     headers: {
       'Content-Type': 'application/json',
-      'x-auth-token':token
     }
   };
   const body = JSON.stringify({ name, price,quantity });
@@ -32,3 +32,20 @@ export const addProduct = (name,price,quantity,token) => async dispatch => {
   }
 };
 
+// get products
+export const getProducts = (token) => async dispatch => {
+  try {
+
+    const res = await axios.get('/api/vendor');
+
+    dispatch({
+      type: GET_PRODUCTS,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: PRODUCTS_ERROR,
+      payload: { msg: "error" }
+    });
+  }
+};

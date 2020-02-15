@@ -31,11 +31,11 @@ const Register = ({register , isAuthenticated}) => {
       if (isAuthenticated) {
           if(type==="vendor")
           {
-            return <Redirect to='/vendor' />;
+            return <Redirect to='/vendor/home' />;
           }
           if(type==="customer") 
           {
-            return <Redirect to='/customer' />;
+            return <Redirect to='/customer/home' />;
           }
     }
 
