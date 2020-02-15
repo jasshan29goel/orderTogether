@@ -7,6 +7,7 @@ const mongoose = require('mongoose')
 const register = require('./routes/api/register');
 const auth = require('./routes/api/auth');
 const vendor = require('./routes/api/vendor');
+const customer = require('./routes/api/customer');
 
 
 
@@ -34,6 +35,7 @@ app.use(express.json({extended : false}));
 app.use('/api/register', register);
 app.use('/api/auth', auth);
 app.use('/api/vendor', vendor);
+app.use('/api/customer/', customer);
 
 
 

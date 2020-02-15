@@ -11,6 +11,7 @@ import Register from './components/Auth/Register'
 import Vendor_Add from './components/Vendor/Vendor_Add'
 import Vendor_Home from './components/Vendor/Vendor_Home'
 import Customer_Home from './components/Customer/Customer_Home'
+import CustomerOrder from './components/Customer/CustomerOrder'
 
 // redux store
 import { Provider } from 'react-redux';
@@ -41,6 +42,7 @@ function App() {
           <Route exact path='/vendor/add' component={Vendor_Add}/>  
           <Route exact path='/vendor/home' component={Vendor_Home}/>  
           <Route exact path='/customer/home' component={Customer_Home}/>  
+          <Route exact path='/customer/product/:id' component={CustomerOrder}/>  
             
           </Switch>
         </section>

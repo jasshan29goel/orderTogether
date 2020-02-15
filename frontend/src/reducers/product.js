@@ -1,7 +1,9 @@
 import {
     PRODUCTS_ERROR,
     ADD_PRODUCT,
-    GET_PRODUCTS
+    GET_PRODUCTS,
+    GET_PRODUCT,
+    ORDER_PRODUCT
 } from '../actions/types';
   
 const initialState = {
@@ -27,6 +29,18 @@ export default function(state = initialState, action) {
                 products: payload,
                 loading: false
             };
+        case GET_PRODUCT:
+            return {
+                ...state,
+                product: payload,
+                loading: false
+            };
+        case ORDER_PRODUCT:
+        return {
+            ...state,
+            product: {...state.product,orders : payload},
+            loading: false
+        };
         case PRODUCTS_ERROR:
             return {
               ...state,
