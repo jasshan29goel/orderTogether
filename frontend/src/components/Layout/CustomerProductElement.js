@@ -1,7 +1,7 @@
 import React,{Fragment} from 'react'
 
 const CustomerProductElement = (props) => {
-    const {name,vendor,price,quantity}=props
+    const {name,vendor,price,quantity,state}=props
     return (
         <Fragment>
             <div className='card mb-2'>
@@ -13,6 +13,7 @@ const CustomerProductElement = (props) => {
                     <li className="list-group-item">Vendor : {vendor}</li>
                     <li className="list-group-item">Price : {price}</li>
                     <li className="list-group-item">Quantity : {quantity}</li>
+                    <li className="list-group-item">Status : {state}</li>
                 </ul>
                 </div>
             </div>    

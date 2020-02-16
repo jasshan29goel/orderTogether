@@ -6,6 +6,7 @@ import {
   GET_PRODUCTS,
   GET_PRODUCT,
   DISPATCH_PRODUCT,
+  CANCEL_PRODUCT
 } from './types';
 
 
@@ -75,6 +76,22 @@ export const dispatchProduct = (id) => async dispatch => {
 
     dispatch({
       type: DISPATCH_PRODUCT,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: PRODUCTS_ERROR,
+      payload: { msg: "error" }
+    });
+  }
+};
+// cancel product
+export const cancelProduct = (id) => async dispatch => {
+  try {
+    const res = await axios.get(`/api/vendor/cancel/${id}`);
+
+    dispatch({
+      type: CANCEL_PRODUCT,
       payload: res.data
     });
   } catch (err) {

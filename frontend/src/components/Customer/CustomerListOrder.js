@@ -16,7 +16,7 @@ const CustomerListOrder = ({ auth,getProducts,product: { products, loading }}) =
             <div className="card">
                 <div className="card-body">
                 {products.map(product => (
-                (!loading && !auth.loading && auth.isAuthenticated && product.orders.findIndex(x => x.customer === auth.user._id)!==-1 ) && <CustomerProductElement name={product.name} vendor={product.vendor} quantity={product.quantity} price={product.price} key={product._id} />
+                (!loading && !auth.loading && auth.isAuthenticated && product.orders.findIndex(x => x.customer === auth.user._id)!==-1 ) && <CustomerProductElement name={product.name} vendor={product.vendor} quantity={product.quantity} price={product.price} key={product._id} state={product.state} />
                 ))}
                 </div>
             </div>

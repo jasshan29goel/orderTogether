@@ -1,13 +1,35 @@
-import React,{Fragment} from 'react';
+import React,{useState,Fragment} from 'react';
+import { Redirect} from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import {getProduct} from '../../actions/product';
 
 const ProductButtonElement = (props) => {
-    const {name,vendor,price,quantity,id}=props
+    const {name,vendor,price,quantity,id,getProduct}=props
+    const [formData, setFormData] = useState({
+        redirect:false
+      });
+
+    const onClick = e => {
+        e.preventDefault();
+        setFormData({redirect:true});
+        getProduct(id);
+
+    };
+
+    if(formData.redirect)
+    {
+        return <Redirect to={`/customer/product/${id}`} />;
+    }
+
     return (
         <Fragment>
             <div className='card mb-2'>
                 <div className="card-header">
                     <h5>{name}
-                    <a className="btn btn-secondary float-right" href={`/customer/product/${id}`}>Place Order</a>
+                    <button className="btn btn-secondary float-right" onClick={e => onClick(e)} >
+                        Place Order
+                        </button>
                     </h5>
                 </div>
                 <div className="card-body">
@@ -21,6 +43,9 @@ const ProductButtonElement = (props) => {
         </Fragment> 
     )
 }
-export default ProductButtonElement;
+ProductButtonElement.propTypes = {
+    getProduct: PropTypes.func.isRequired
+};
+export default connect(null,{getProduct})(ProductButtonElement);
 
  

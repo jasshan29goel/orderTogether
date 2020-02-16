@@ -6,11 +6,11 @@ import { getProducts } from '../../actions/product';
 
 import VendorProductElement from '../Layout/VendorProductElement';
 
-const Vendor_Home = ({ auth,getProducts,product: { products, loading }}) => {
+const Vendor_Home = ({ auth,getProducts,product: { product,products, loading }}) => {
     
     useEffect(() => {
         getProducts();
-      }, [getProducts]);
+      }, [getProducts,product]);
     return !loading &&  (
         <Fragment>
             <div className="card">
@@ -23,7 +23,7 @@ const Vendor_Home = ({ auth,getProducts,product: { products, loading }}) => {
                 </div>
                 <div className="card-body">
                 {products.map(product => (
-                (!auth.loading && auth.isAuthenticated && product.vendor===auth.user._id && product.state==="waiting") && <VendorProductElement name={product.name} quantity={product.quantity} price={product.price} key={product._id} />
+                (!auth.loading && auth.isAuthenticated && product.vendor===auth.user._id && product.state==="waiting") && <VendorProductElement name={product.name} quantity={product.quantity} price={product.price} key={product._id} id={product._id} />
                 ))}
                 </div>
             </div>

@@ -95,9 +95,36 @@ async (req,res)=>{
 
         // Check for ObjectId format and post
         if (!req.params.id.match(/^[0-9a-fA-F]{24}$/) || !product) {
-          return res.status(404).json({ msg: 'question not found' });
+          return res.status(404).json({ msg: 'product not found' });
         }
         product.state="dispatched";
+        const updateProduct=await product.save();
+
+        res.json(updateProduct);
+
+      } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+      }
+
+});
+
+/*
+get product by id route
+@/api/vendor/cancel/:id
+*/
+
+router.get('/cancel/:id',auth,
+async (req,res)=>{
+
+    try {
+        const product = await Product.findById(req.params.id);
+
+        // Check for ObjectId format and post
+        if (!req.params.id.match(/^[0-9a-fA-F]{24}$/) || !product) {
+          return res.status(404).json({ msg: 'product not found' });
+        }
+        product.state="cancelled";
         const updateProduct=await product.save();
 
         res.json(updateProduct);

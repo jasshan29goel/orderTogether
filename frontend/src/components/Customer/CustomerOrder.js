@@ -7,9 +7,7 @@ import FormElement from '../Layout/FormElement';
 import CustomerProductElement from '../Layout/CustomerProductElement';
 
 const CustomerOrder = ({ orderProduct,getProduct ,match,product,loading}) => {
-    useEffect(() => {
-        getProduct(match.params.id);
-      }, [getProduct,match.params.id]);
+
     
     const [formData, setFormData] = useState({
         quantity:0
@@ -25,12 +23,17 @@ const CustomerOrder = ({ orderProduct,getProduct ,match,product,loading}) => {
         orderProduct(quantity,match.params.id);
 
     };
-    return !loading && (
+    useEffect(() => {
+      getProduct(match.params.id);
+    }, [getProduct]);
+
+    return !loading && product !== null && (
         <Fragment> 
         <div className="container card mb-3 ">
+          <a className="btn btn-secondary mt-2 mb-2 col-sm-1" href="/customer/home">Home</a>
      <div className="card-header">
-     <CustomerProductElement name={product.name} vendor={product.vendor} quantity={product.quantity} price={product.price} />
-     </div>
+      <CustomerProductElement name={product.name} vendor={product.vendor} quantity={product.quantity} price={product.price} state={product.state} />
+      </div>
      <div className="card-body">
          <form onSubmit={e => onSubmit(e)}>
          <FormElement label="Quantity"  name="quantity" placeholder="Enter Quantity you want to order" type="number" value={quantity} onChange={e => onChange(e)}/>
@@ -47,7 +50,8 @@ const CustomerOrder = ({ orderProduct,getProduct ,match,product,loading}) => {
 }
 CustomerOrder.propTypes = {
     orderProduct: PropTypes.func.isRequired,
-    getProduct: PropTypes.func.isRequired
+    getProduct: PropTypes.func.isRequired,
+    product:PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({
      product: state.product.product,
