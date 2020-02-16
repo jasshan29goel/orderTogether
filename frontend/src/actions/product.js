@@ -5,6 +5,7 @@ import {
   ORDER_PRODUCT,
   GET_PRODUCTS,
   GET_PRODUCT,
+  DISPATCH_PRODUCT,
 } from './types';
 
 
@@ -58,6 +59,22 @@ export const getProduct = (id) => async dispatch => {
 
     dispatch({
       type: GET_PRODUCT,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: PRODUCTS_ERROR,
+      payload: { msg: "error" }
+    });
+  }
+};
+// dispatch product
+export const dispatchProduct = (id) => async dispatch => {
+  try {
+    const res = await axios.get(`/api/vendor/dispatch/${id}`);
+
+    dispatch({
+      type: DISPATCH_PRODUCT,
       payload: res.data
     });
   } catch (err) {

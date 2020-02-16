@@ -3,7 +3,8 @@ import {
     ADD_PRODUCT,
     GET_PRODUCTS,
     GET_PRODUCT,
-    ORDER_PRODUCT
+    ORDER_PRODUCT,
+    DISPATCH_PRODUCT
 } from '../actions/types';
   
 const initialState = {
@@ -30,6 +31,7 @@ export default function(state = initialState, action) {
                 loading: false
             };
         case GET_PRODUCT:
+        case DISPATCH_PRODUCT:
             return {
                 ...state,
                 product: payload,
@@ -38,7 +40,7 @@ export default function(state = initialState, action) {
         case ORDER_PRODUCT:
         return {
             ...state,
-            product: {...state.product,orders : payload},
+            product: payload,
             loading: false
         };
         case PRODUCTS_ERROR:

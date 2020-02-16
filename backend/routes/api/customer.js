@@ -63,21 +63,25 @@ router.post('/order/:id',
                   .json({ errors: [{ msg: 'should be a customer' }] });
               }
             const product = await Product.findById(objectid);
-
+            if (product.quantity<quantity) {
+                return res
+                  .status(400)
+                  .json({ errors: [{ msg: 'quantity not available' }] });
+              }
             const newOrder= {
                 customer: customerid,
                 quantity: quantity,
             };
             product.orders.unshift(newOrder);
             product.quantity-=quantity;   
-            // if(product.quantity==0)
-            // {
-            //     product.status="ready"
-            // }                     
-            await product.save();
+            if(product.quantity==0)
+            {
+                product.state="placed"
+            }                     
+            const updateProduct=await product.save();
     
 
-            res.json(product.orders);
+            res.json(updateProduct);
     
          
         }

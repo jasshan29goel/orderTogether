@@ -1,11 +1,16 @@
-import React ,{ useState ,Fragment} from 'react'
+import React ,{ useState ,Fragment,useEffect} from 'react'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { orderProduct } from '../../actions/product';
+import { orderProduct,getProduct } from '../../actions/product';
 
 import FormElement from '../Layout/FormElement';
+import CustomerProductElement from '../Layout/CustomerProductElement';
 
-const CustomerOrder = ({ orderProduct ,match}) => {
+const CustomerOrder = ({ orderProduct,getProduct ,match,product,loading}) => {
+    useEffect(() => {
+        getProduct(match.params.id);
+      }, [getProduct,match.params.id]);
+    
     const [formData, setFormData] = useState({
         quantity:0
       });
@@ -18,11 +23,13 @@ const CustomerOrder = ({ orderProduct ,match}) => {
       const onSubmit = e => {
         e.preventDefault();
         orderProduct(quantity,match.params.id);
+
     };
-    return (
+    return !loading && (
         <Fragment> 
         <div className="container card mb-3 ">
-     <div className="card-header">Order Product
+     <div className="card-header">
+     <CustomerProductElement name={product.name} vendor={product.vendor} quantity={product.quantity} price={product.price} />
      </div>
      <div className="card-body">
          <form onSubmit={e => onSubmit(e)}>
@@ -39,11 +46,14 @@ const CustomerOrder = ({ orderProduct ,match}) => {
     )
 }
 CustomerOrder.propTypes = {
-    orderProduct: PropTypes.func.isRequired
+    orderProduct: PropTypes.func.isRequired,
+    getProduct: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
-    // token: state.auth.token
+     product: state.product.product,
+     loading: state.product.loading
+
   });
-export default connect(mapStateToProps,{orderProduct})(CustomerOrder);
+export default connect(mapStateToProps,{orderProduct,getProduct})(CustomerOrder);
 
 

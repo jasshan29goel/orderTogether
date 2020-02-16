@@ -10,7 +10,9 @@ import Login from './components/Auth/Login'
 import Register from './components/Auth/Register'
 import Vendor_Add from './components/Vendor/Vendor_Add'
 import Vendor_Home from './components/Vendor/Vendor_Home'
+import VendorPlaced from './components/Vendor/VendorPlaced'
 import Customer_Home from './components/Customer/Customer_Home'
+import CustomerListOrder from './components/Customer/CustomerListOrder'
 import CustomerOrder from './components/Customer/CustomerOrder'
 
 // redux store
@@ -41,8 +43,10 @@ function App() {
           <Route exact path='/login' component={Login}/>  
           <Route exact path='/vendor/add' component={Vendor_Add}/>  
           <Route exact path='/vendor/home' component={Vendor_Home}/>  
+          <Route exact path='/vendor/placed' component={VendorPlaced}/>  
           <Route exact path='/customer/home' component={Customer_Home}/>  
           <Route exact path='/customer/product/:id' component={CustomerOrder}/>  
+          <Route exact path='/customer/orders' component={CustomerListOrder}/>  
             
           </Switch>
         </section>
