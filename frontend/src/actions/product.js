@@ -6,7 +6,8 @@ import {
   GET_PRODUCTS,
   GET_PRODUCT,
   DISPATCH_PRODUCT,
-  CANCEL_PRODUCT
+  CANCEL_PRODUCT,
+  EDIT_ORDER_PRODUCT
 } from './types';
 
 
@@ -116,6 +117,31 @@ export const orderProduct = (quantity,id) => async dispatch => {
 
     dispatch({
       type: ORDER_PRODUCT,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: PRODUCTS_ERROR,
+      payload: { msg: "error" }
+    });
+  }
+};
+
+// edit order product
+export const editOrderProduct = (quantity,id) => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+
+  try {
+    const body = JSON.stringify({ quantity });
+
+    const res =await axios.post(`/api/customer/order/edit/${id}`,body,config);
+
+    dispatch({
+      type: EDIT_ORDER_PRODUCT,
       payload: res.data
     });
   } catch (err) {

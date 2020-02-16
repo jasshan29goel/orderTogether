@@ -38,7 +38,7 @@ const Customer_Home = ({ auth,getProducts,product: { products, loading }}) => {
                 </div>
                 <div className="card-body">
                 {products.sort((a, b) => a[sort] - b[sort]) && products.map(product => (
-                (!auth.loading && auth.isAuthenticated && product.name.includes(name) && product.orders.findIndex(x => x.customer === auth.user._id)===-1) && <ProductButtonElement name={product.name} vendor={product.vendor} quantity={product.quantity} price={product.price} key={product._id} id={product._id} />
+                (!auth.loading && auth.isAuthenticated && product.name.includes(name) && product.orders.findIndex(x => x.customer === auth.user._id)===-1 && product.state==="waiting") && <ProductButtonElement name={product.name} vendor={product.vendor} quantity={product.quantity} price={product.price} key={product._id} id={product._id} />
                 ))}
                 </div>
             </div>

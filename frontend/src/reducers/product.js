@@ -5,7 +5,8 @@ import {
     GET_PRODUCT,
     ORDER_PRODUCT,
     DISPATCH_PRODUCT,
-    CANCEL_PRODUCT
+    CANCEL_PRODUCT,
+    EDIT_ORDER_PRODUCT
 } from '../actions/types';
   
 const initialState = {
@@ -40,6 +41,7 @@ export default function(state = initialState, action) {
                 loading: false
             };
         case ORDER_PRODUCT:
+        case EDIT_ORDER_PRODUCT:
         return {
             ...state,
             product: payload,

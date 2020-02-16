@@ -14,6 +14,7 @@ import VendorPlaced from './components/Vendor/VendorPlaced'
 import Customer_Home from './components/Customer/Customer_Home'
 import CustomerListOrder from './components/Customer/CustomerListOrder'
 import CustomerOrder from './components/Customer/CustomerOrder'
+import CustomerOrderEdit from './components/Customer/CustomerOrderEdit'
 
 // redux store
 import { Provider } from 'react-redux';
@@ -46,6 +47,7 @@ function App() {
           <Route exact path='/vendor/placed' component={VendorPlaced}/>  
           <Route exact path='/customer/home' component={Customer_Home}/>  
           <Route exact path='/customer/product/:id' component={CustomerOrder}/>  
+          <Route exact path='/customer/product/edit/:id' component={CustomerOrderEdit}/>  
           <Route exact path='/customer/orders' component={CustomerListOrder}/>  
             
           </Switch>
