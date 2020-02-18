@@ -6,7 +6,8 @@ import {
     ORDER_PRODUCT,
     DISPATCH_PRODUCT,
     CANCEL_PRODUCT,
-    EDIT_ORDER_PRODUCT
+    EDIT_ORDER_PRODUCT,
+    REVIEW_PRODUCT
 } from '../actions/types';
   
 const initialState = {
@@ -35,6 +36,7 @@ export default function(state = initialState, action) {
         case GET_PRODUCT:
         case DISPATCH_PRODUCT:
         case CANCEL_PRODUCT:
+        case REVIEW_PRODUCT:
             return {
                 ...state,
                 product: payload,

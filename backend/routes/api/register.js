@@ -43,6 +43,7 @@ router.post('/',
                     email,
                     password,
                     type,
+                    ratings:[]
                   });
             
                   const salt = await bcrypt.genSalt(10);

@@ -41,10 +41,13 @@ router.post('/add',
                 let newProduct = new Product({
                     vendor:id,
                     name:name,
+                    vendorName:"",
+                    vendorRating:0,
                     price:price,
                     quantity:quantity,
                     state:"waiting",
-                    orders:[]
+                    orders:[],
+                    reviews:[]
                   });
                         
                   product=await newProduct.save();
@@ -73,7 +76,27 @@ async (req,res)=>{
 
     try {
         const products = await Product.find();
-        res.json(products);
+        let users=await User.find();
+        const newProducts=[];
+        products.forEach((product) => {
+          var newProduct=product;
+          var user=users.find(a => a._id.toString() == product.vendor.toString());
+          newProduct['vendorName']=user.name;
+          var j=0;
+          for (i in user.ratings)
+          {
+            newProduct['vendorRating']+=user.ratings[i].rating;  
+            j+=1;
+          }
+          if(j!=0)
+          {
+          newProduct['vendorRating']/=j;
+          }
+          // newProduct['vendorRating']=user.ratings.reduce((a,b)=>a.rating+b.rating,0);
+          // console.log(newProduct);          
+          newProducts.push(newProduct);
+         });
+        res.json(newProducts);
       } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error');

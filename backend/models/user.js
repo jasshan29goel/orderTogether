@@ -16,7 +16,19 @@ let User = new mongoose.Schema({
       type:{
           type:String,
           required:true
+      },
+      ratings:[
+        {
+          customer:{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'users'
+        },
+          rating:{
+            type: Number
+          }
       }
+
+    ]
 });
 
 module.exports = mongoose.model('User', User);

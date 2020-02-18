@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import {getProduct} from '../../actions/product';
 
 const ProductButtonElement = (props) => {
-    const {name,vendor,price,quantity,id,getProduct}=props
+    const {name,vendor,price,quantity,id,getProduct,vendorName,vendorRating}=props
     const [formData, setFormData] = useState({
         redirect:false
       });
@@ -34,9 +34,10 @@ const ProductButtonElement = (props) => {
                 </div>
                 <div className="card-body">
                 <ul className="list-group list-group-flush">
-                    <li className="list-group-item">Vendor : {vendor}</li>
+                    <li className="list-group-item">Vendor : {vendorName}</li>
                     <li className="list-group-item">Price : {price}</li>
                     <li className="list-group-item">Quantity : {quantity}</li>
+                    <li className="list-group-item">Vendor Rating : {vendorRating}</li>
                 </ul>
                 </div>
             </div>    

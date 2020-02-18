@@ -16,6 +16,8 @@ const EditOrderProductElement = (props) => {
                     <li className="list-group-item">Quantity : {quantity}</li>
                     <li className="list-group-item">Status : {state}
                     { state==="waiting" && <Link to={`/customer/product/edit/${id}`}  className="btn btn-secondary float-right">Edit order</Link>}
+                    { state==="dispatched" && <Link to={`/customer/product/review/${id}`}  className="btn btn-secondary float-right">Review order</Link>}
+                    { state==="placed" && <Link to={`/customer/vendor/rate/${id}`}  className="btn btn-secondary float-right">Rate Vendor</Link>}
                     </li>
                 </ul>
                 </div>

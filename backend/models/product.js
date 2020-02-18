@@ -10,6 +10,12 @@ let Product = new mongoose.Schema({
         type: String,
         required: true
       },
+    vendorName: {
+        type: String,
+      },
+    vendorRating: {
+        type: Number,
+      },
       price: {
         type: Number,
         required: true
@@ -32,6 +38,21 @@ let Product = new mongoose.Schema({
                 type: Number,
             }
         }
+      ],
+      reviews:[
+          {
+            customer:{
+              type: mongoose.Schema.Types.ObjectId,
+              ref: 'users'
+          },
+            rating:{
+              type: Number
+            },
+            text:{
+              type:String
+            }
+        }
+
       ]
 });
 

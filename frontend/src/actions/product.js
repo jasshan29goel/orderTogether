@@ -7,7 +7,8 @@ import {
   GET_PRODUCT,
   DISPATCH_PRODUCT,
   CANCEL_PRODUCT,
-  EDIT_ORDER_PRODUCT
+  EDIT_ORDER_PRODUCT,
+  REVIEW_PRODUCT
 } from './types';
 
 
@@ -36,6 +37,32 @@ export const addProduct = (name,price,quantity) => async dispatch => {
     });
   }
 };
+
+// add products review
+export const reviewProduct = (id,rating,text) => async dispatch => {
+    
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  };
+  const body = JSON.stringify({ rating,text });
+
+  try {
+    const res =await axios.post(`/api/customer/order/review/${id}`,body,config);
+
+    dispatch({
+      type: REVIEW_PRODUCT,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: PRODUCTS_ERROR,
+      payload: { msg: "error" }
+    });
+  }
+};
+
 
 // get products
 export const getProducts = (token) => async dispatch => {
@@ -151,3 +178,7 @@ export const editOrderProduct = (quantity,id) => async dispatch => {
     });
   }
 };
+
+
+
+

@@ -159,5 +159,103 @@ router.post('/order/edit/:id',
 
 );
 
+/* 
+review order route    @/api/customer/order/review/:id
+Private 
+validation
+*/
+router.post('/order/review/:id',
+    [auth,[
+        check('rating', 'rating is required').not().isEmpty(),    
+        check('text', 'review is required').not().isEmpty(),    
+    ]],
+    async (req,res)=>
+    {
+        const errors=validationResult(req);
+        if(!errors.isEmpty()){
+            return res.status(400).json({errors:errors.array()});
+        }
+
+        const {rating,text} = req.body;
+
+        try{
+            const objectid=req.params.id;
+            const customerid=req.user.id;
+            let user = await User.findOne({ _id:customerid });
+
+            if (user.type!="customer") {
+                return res
+                  .status(400)
+                  .json({ errors: [{ msg: 'should be a customer' }] });
+              }
+              const product = await Product.findById(objectid);
+              const newReview= {
+                  customer: customerid,
+                  rating: rating,
+                  text: text
+              };
+              product.reviews.unshift(newReview);
+              const updateProduct=await product.save();
+              res.json(updateProduct);
+    
+         
+        }
+        catch(err){
+            console.error(err.message);
+            res.status(500).send('Server error');
+        }
+
+    }
+
+);
+
+
+/* 
+review vendor route    @/api/customer/vendor/rate/:id
+Private 
+validation
+*/
+router.post('/vendor/rate/:id',
+    [auth,[
+        check('rating', 'rating is required').not().isEmpty(),    
+    ]],
+    async (req,res)=>
+    {
+        const errors=validationResult(req);
+        if(!errors.isEmpty()){
+            return res.status(400).json({errors:errors.array()});
+        }
+
+        const {rating} = req.body;
+
+        try{
+            const vendorid=req.params.id;
+            const customerid=req.user.id;
+            let user = await User.findOne({ _id:customerid });
+
+            if (user.type!="customer") {
+                return res
+                  .status(400)
+                  .json({ errors: [{ msg: 'should be a customer' }] });
+              }
+              const vendor = await User.findById(vendorid);
+              const newRating= {
+                  customer: customerid,
+                  rating: rating
+              };
+              vendor.ratings.unshift(newRating);
+              const updateVendor=await vendor.save();
+              res.json(updateVendor);
+    
+         
+        }
+        catch(err){
+            console.error(err.message);
+            res.status(500).send('Server error');
+        }
+
+    }
+
+);
 
 module.exports =router;

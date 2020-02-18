@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 
 import { getProducts } from '../../actions/product';
 
-import VendorProductElement from '../Layout/VendorProductElement';
+import CheckReviewProductElement from '../Layout/CheckReviewProductElement';
 
-const Vendor_Home = ({ auth,getProducts,product: { product,products, loading }}) => {
+const VendorDispatched = ({ auth,getProducts,product: { products,product, loading }}) => {
     
     useEffect(() => {
         getProducts();
@@ -16,15 +16,11 @@ const Vendor_Home = ({ auth,getProducts,product: { product,products, loading }})
             <div className="card">
                 <div className="card-header">
                 <h4>Vendor Name
-                <a className="btn btn-secondary float-right" href="/vendor/add">Add Product</a>
-                <a className="btn btn-secondary float-right mr-2" href="/vendor/placed">Dispatch Product</a>
-                <a className="btn btn-secondary float-right mr-2" href="/vendor/review">Check Reviews</a>
-
                 </h4>
                 </div>
                 <div className="card-body">
                 {products.map(product => (
-                (!auth.loading && auth.isAuthenticated && product.vendor===auth.user._id && product.state==="waiting") && <VendorProductElement name={product.name} quantity={product.quantity} price={product.price} key={product._id} id={product._id} />
+                (!auth.loading && auth.isAuthenticated && product.vendor===auth.user._id && product.state==="dispatched") && <CheckReviewProductElement name={product.name} quantity={product.quantity} price={product.price} key={product._id} reviews={product.reviews}/>
                 ))}
                 </div>
             </div>
@@ -32,7 +28,7 @@ const Vendor_Home = ({ auth,getProducts,product: { product,products, loading }})
     )
 }
 
-Vendor_Home.propTypes = {
+VendorDispatched.propTypes = {
     getProducts: PropTypes.func.isRequired,
     product: PropTypes.object.isRequired,
   };
@@ -45,7 +41,7 @@ const mapStateToProps = state => ({
 export default connect(
     mapStateToProps,
     { getProducts }
-  )(Vendor_Home);
+  )(VendorDispatched);
 
 
 
