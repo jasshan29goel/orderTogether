@@ -22,7 +22,8 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Connection to mongodb
-mongoose.connect('mongodb://127.0.0.1:27017/orderTogether', { useNewUrlParser: true });
+// mongoose.connect('mongodb://127.0.0.1:27017/orderTogether', { useNewUrlParser: true });
+mongoose.connect('mongodb+srv://sherlhangar:meenal129@cluster0-bzfxp.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true });
 const connection = mongoose.connection;
 connection.once('open', function() {
     console.log("MongoDB database connection established succesfully.");

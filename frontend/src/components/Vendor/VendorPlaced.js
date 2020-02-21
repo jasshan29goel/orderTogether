@@ -15,7 +15,9 @@ const VendorPlaced = ({ auth,getProducts,product: { products,product, loading }}
         <Fragment>
             <div className="card">
                 <div className="card-header">
-                <h4>Vendor Name
+                <a className="btn btn-secondary mt-2 mb-2 col-md-1 float-right" href="/vendor/home">Home</a>
+
+                <h4>{auth.user.name}
                 </h4>
                 </div>
                 <div className="card-body">

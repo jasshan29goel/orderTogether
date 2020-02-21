@@ -15,7 +15,7 @@ const Vendor_Home = ({ auth,getProducts,product: { product,products, loading }})
         <Fragment>
             <div className="card">
                 <div className="card-header">
-                <h4>Vendor Name
+                <h4>{auth.user.name}
                 <a className="btn btn-secondary float-right" href="/vendor/add">Add Product</a>
                 <a className="btn btn-secondary float-right mr-2" href="/vendor/placed">Dispatch Product</a>
                 <a className="btn btn-secondary float-right mr-2" href="/vendor/review">Check Reviews</a>

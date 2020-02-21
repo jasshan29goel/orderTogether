@@ -24,7 +24,12 @@ const Vendor_Add = ({ token,addProduct }) => {
     return (
         <Fragment> 
         <div className="container card mb-3 ">
-     <div className="card-header">Add Product
+
+     <div className="card-header">
+     <a className="btn btn-secondary mt-2 mb-2 col-md-1 float-right" href="/vendor/home">Home</a>
+         <h4>
+         Add Product
+         </h4>
      </div>
      <div className="card-body">
          <form onSubmit={e => onSubmit(e)}>
